@@ -17,14 +17,14 @@ TEST_CASE( "logger logSimpleString", "[factorial]" ) {
 
 	// pre
 	const std::string logFileName = "lolz.txt";
-	student::common::Logger* pLogger = new student::common::Logger(logFileName);
+	std::auto_ptr<student::common::Logger> pLogger(new student::common::Logger(logFileName));
 
 	// given
 	std::string logEntry = "tralalala";
 
 	// when
 	pLogger->log(logEntry);
-	delete pLogger;
+	// delete pLogger;
 
 	std::string logFileContent;
 

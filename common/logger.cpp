@@ -24,6 +24,7 @@ Logger::Logger(std::string filename) {
 	}
 }
 
+
 Logger::~Logger() {
 	m_file.close();
 }
@@ -33,4 +34,16 @@ void Logger::log(std::string aLog) {
 	m_file << aLog << std::endl;
 }
 
+void Logger::log(int* collection)
+{
+    int array_size;
+    array_size = sizeof(collection)/sizeof(int);
+    for(int i=0; i<array_size; i++)
+    {
+        std::cout << collection[i] << " ";
+        m_file << collection[i] << " ";
+    }
+    std::cout<<std::endl;
+    m_file <<std::endl;
+}
 
