@@ -10,7 +10,14 @@
 #ifndef QUICKSORT_H_
 #define QUICKSORT_H_
 
-int quicksort(int* sorted_tab);
+
+/*
+ * /param collection
+ *
+ *
+ */
+void quicksort_number(int* collection);
+
 
 
 #endif // QUICKSORT_H_

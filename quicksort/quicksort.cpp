@@ -7,9 +7,10 @@
 #include <iostream>
 #include "quicksort.h"
 
-int quicksort(int* testing_tab)
+void quicksort_number(int* collection)
 {
-    return 0;
+
+
 }
 
 
