@@ -42,9 +42,20 @@ void Logger::log(double nLog) {
 	m_file << nLog << std::endl;
 }
 
-void Logger::log(int* collection, int array_size)
+void Logger::log(int* collection, int tabLength)
 {
-    for(int i=0; i<array_size; ++i)
+    for(int i=0; i<tabLength; ++i)
+    {
+        std::cout << collection[i] << " ";
+        m_file << collection[i] << " ";
+    }
+    std::cout<<std::endl;
+    m_file <<std::endl;
+}
+
+void Logger::log(double* collection, int tabLength)
+{
+    for(int i=0; i<tabLength; ++i)
     {
         std::cout << collection[i] << " ";
         m_file << collection[i] << " ";
