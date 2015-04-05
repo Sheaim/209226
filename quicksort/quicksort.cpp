@@ -9,8 +9,31 @@
 
 void quicksort_number(int* collection)
 {
-
-
+    int array_size;
+    array_size = sizeof(collection)/sizeof(int);
+    int pivot;
+    int* temp;
+    for (int i=0; i<array_size; ++i)
+    {
+        pivot = collection[i];
+    }
+    pivot = pivot/array_size;
+    int first_counter=&collection[0];
+    int second_counter=&collection[array_size];
+    while(*first_counter<=*second_counter)
+    {
+        while(*first_counter<pivot)
+        {
+            i++;
+            while(*second_counter>pivot)
+            {
+                --second_counter;
+            }
+        }
+        temp = first_counter;
+        first_counter=second_counter;
+        second_counter=temp;
+    }
 }
 
 
