@@ -1,6 +1,6 @@
 /*
  * quicksort.h
- * created on aprol 5 2015
+ * created on april 5 2015
  * author: sheaim
  *
  */
@@ -17,6 +17,7 @@
  *
  */
 void quicksort_number(int* collection);
+
 
 
 

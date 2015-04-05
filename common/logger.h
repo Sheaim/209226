@@ -27,7 +27,8 @@ public:
 	virtual ~Logger();
 
 public:
-	void log(std::string aLog);
+	virtual void log(std::string aLog);
+	virtual void log(int* collection);
 };
 
 }

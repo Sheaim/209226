@@ -6,6 +6,8 @@
  */
 #include <iostream>
 #include "quicksort.h"
+#include "logger.h"
+
 
 void quicksort_number(int* collection)
 {
@@ -18,13 +20,13 @@ void quicksort_number(int* collection)
         pivot = collection[i];
     }
     pivot = pivot/array_size;
-    int first_counter=&collection[0];
-    int second_counter=&collection[array_size];
+    int* first_counter=&collection[0];
+    int* second_counter=&collection[array_size];
     while(*first_counter<=*second_counter)
     {
         while(*first_counter<pivot)
         {
-            i++;
+            ++first_counter;
             while(*second_counter>pivot)
             {
                 --second_counter;
