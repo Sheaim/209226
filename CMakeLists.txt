@@ -1,5 +1,5 @@
 cmake_minimum_required (VERSION 2.6)
-project (lab3)
+project (lab4)
 
 set (lab3_VERSION_MAJOR 0)
 set (lab3_VERSION_MINOR_1)
@@ -22,13 +22,11 @@ set (lab3_VERSION_MINOR_1)
 # NEVER ever include windows.h from non-ui!
 # sched_setaffinity not present on OSX ... rats!
 
-include_directories("${PROJECT_SOURCE_DIR}/common"
-    "${PROJECT_SOURCE_DIR}/../209226/Quicksort\ fun")
+#include_directories("${PROJECT_SOURCE_DIR}/common"
+#    "${PROJECT_SOURCE_DIR}/quicksort")
 
 add_subdirectory(common)
-
-add_executable(lab3
-    main.cpp)
+add_subdirectory(quicksort)
 
 enable_testing()
 
