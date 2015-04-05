@@ -1,0 +1,22 @@
+Start testing: Apr 05 17:37 Central European Daylight Time
+----------------------------------------------------------
+1/1 Testing: quicksortTest
+1/1 Test: quicksortTest
+Command: "D:/STUDIA/PAMiSI/209226/quicksort/quicksort_tests.exe"
+Directory: D:/STUDIA/PAMiSI/209226/quicksort
+"quicksortTest" start time: Apr 05 17:37 Central European Daylight Time
+Output:
+----------------------------------------------------------
+===============================================================================
+test cases: 1 | 1 passed
+assertions: - none -
+
+<end of output>
+Test time =   1.69 sec
+----------------------------------------------------------
+Test Passed.
+"quicksortTest" end time: Apr 05 17:37 Central European Daylight Time
+"quicksortTest" time elapsed: 00:00:01
+----------------------------------------------------------
+
+End testing: Apr 05 17:37 Central European Daylight Time
