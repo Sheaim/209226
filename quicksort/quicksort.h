@@ -16,8 +16,8 @@
  *
  *
  */
-void quicksort_number(int* collection);
-
+int* quicksort_number(int* collection,int array_size);
+int* merge_arrays(int* low, int lowSize, int* high, int highSize);
 
 
 

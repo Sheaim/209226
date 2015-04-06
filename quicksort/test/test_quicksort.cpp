@@ -22,19 +22,21 @@ TEST_CASE( "quicksort sortSimpleArray", "[factorial]" ) {
 	std::auto_ptr<student::common::Logger> pLogger(new student::common::Logger(logFileName));
 
 	// given
-	int testing_tab[5] = {2, 3, 5, 4, 1};
+	int testing_tab[5] = {5, 3, 2, 4, 1};
 	int expected_tab[5] = {1, 2, 3, 4, 5};
     int tab_lenght = sizeof(testing_tab)/sizeof(int);
+	int* result_tab = new int[tab_lenght];
 	// when
-	quicksort_number(testing_tab);
-    pLogger->log(testing_tab);
-    pLogger->log(expected_tab);
+	pLogger->log(testing_tab, tab_lenght);
+	result_tab = quicksort_number(testing_tab, tab_lenght);
+    pLogger->log(result_tab, tab_lenght);
+    pLogger->log(expected_tab, tab_lenght);
 	// then
 	for(int i=0; i<tab_lenght;++i)
 	{
         REQUIRE(testing_tab[i] == expected_tab[i]);
 	}
-	pLogger->log(testing_tab);
+	pLogger->log(testing_tab, tab_lenght);
 	//cleanup
 
 }
