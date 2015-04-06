@@ -10,29 +10,31 @@
 
 const std::string wrong_value_error_message = "Error: array part is not a number.";
 
-int* merge_arrays(int* low, int lowArraySize, int* high, int highArraySize)
+int* merge_arrays(int* low, int lowArrayLenght, int* high, int highArrayLenght)
 {
-    for(int i=0; i<lowArraySize;++i)
+    std::cout<<"low array"<<std::endl;
+    for(int i=0; i<lowArrayLenght;++i)
     {
         std::cout<<low[i]<<" ";
     }
     std::cout<<std::endl;
-    int mergedArraySize = lowArraySize+highArraySize;
-    int* mergedArray = new int[mergedArraySize];
-    for(int i=0; i<lowArraySize;++i)
+    int mergedArrayLenght = lowArrayLenght+highArrayLenght;
+    int* mergedArray = new int[mergedArrayLenght];
+    for(int i=0; i<lowArrayLenght;++i)
     {
         mergedArray[i] = low[i];
     }
-    for(int i=0; i<highArraySize;++i)
+    std::cout<<"high array"<<std::endl;
+    for(int i=0; i<highArrayLenght;++i)
     {
         std::cout<<high[i]<<" ";
     }
     std::cout<<std::endl;
-    for(int i=0; i<highArraySize;++i)
+    for(int i=0; i<highArrayLenght;++i)
     {
-        mergedArray[i+lowArraySize] = high[i];
+        mergedArray[i+lowArrayLenght] = high[i];
     }
-    for(int i=0; i<mergedArraySize;++i)
+    for(int i=0; i<mergedArrayLenght;++i)
     {
         std::cout<<mergedArray[i]<<" ";
     }
@@ -40,26 +42,26 @@ int* merge_arrays(int* low, int lowArraySize, int* high, int highArraySize)
     return mergedArray;
 }
 
-int* quicksort_number(int* collection, int array_size)
+int* quicksort_number(int* collection, int array_lenght)
 {
     int pivot;
-    int* low = new int[array_size];
-    int* high = new int[array_size];
+    int* low = new int[array_lenght];
+    int* high = new int[array_lenght];
     int counterOfLowArrayElements=0;
     int counterOfHighArrayElements=0;
-    for(int i=0; i<array_size;++i)
+    for(int i=0; i<array_lenght;++i)
     {
         std::cout<<collection[i]<<" ";
     }
     std::cout<<std::endl;
     std::cout<<"finding pivot"<<std::endl;
     pivot = 0;
-    for (int i=0; i<array_size; ++i)
+    for (int i=0; i<array_lenght; ++i)
     {
         pivot = pivot + collection[i];
     }
-    pivot = pivot/array_size;
-    for(int i=0; i<array_size; ++i)
+    pivot = pivot/array_lenght;
+    for(int i=0; i<array_lenght; ++i)
     {
         if (collection[i]<=pivot)
         {
@@ -87,9 +89,10 @@ int* quicksort_number(int* collection, int array_size)
         quicksort_number(high, counterOfHighArrayElements);
     }
 
-    collection = merge_arrays(low, counterOfLowArrayElements, high, counterOfHighArrayElements);
-    for(int i=0; i<array_size;++i)
+
+    for(int i=0; i<array_lenght;++i)
     {
+        collection[i] = merge_arrays(low, counterOfLowArrayElements, high, counterOfHighArrayElements)[i];
         std::cout<<collection[i]<<" ";
     }
     std::cout<<std::endl;

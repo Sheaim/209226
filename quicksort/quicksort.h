@@ -16,8 +16,8 @@
  *
  *
  */
-int* quicksort_number(int* collection,int array_size);
-int* merge_arrays(int* low, int lowSize, int* high, int highSize);
+int* quicksort_number(int* collection,int array_lenght);
+int* merge_arrays(int* low, int lowLenght, int* high, int highLenght);
 
 
 
