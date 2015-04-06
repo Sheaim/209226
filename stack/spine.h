@@ -1,8 +1,11 @@
+#ifndef  SPINEH
+#define  SPINEH
 #include <iostream>
 #include <cstdlib>
 #include <fstream>
 #include <string>
-#include <list>
+#include "stack.h"
+#include "Cell.h"
 #include <ctime>
 #include <windows.h>
 
@@ -14,7 +17,7 @@ class benchmark
     public:
         void file(string, bool);
         string generate_data(int, bool);
-        void test(list<int>, int, int, int, bool);
+        void test(stack *, int, int, int, bool);
         benchmark(int, bool);
         ~benchmark();
 };
@@ -106,7 +109,7 @@ void benchmark::file(string filename, bool Debug_Mode)
     else
         cout<<"nie otwarto pliku"<<endl;
 }
-void benchmark::test(list<int> lista, int initial,int steps, int repetitions, bool Debug_Mode)
+void benchmark::test(stack * stos, int initial,int steps, int repetitions, bool Debug_Mode)
 {/*Pisane bezposrednio pod liste. Modyfikacja tej funkcji bedzie niezbedna do badania jakichkolwiek innych programow*/
     int i;
     int j;
@@ -130,15 +133,6 @@ void benchmark::test(list<int> lista, int initial,int steps, int repetitions, bo
             {
                 cout<<"powtorzenie "<<j+1<<endl;
             }
-            for(k=0; k<amount_of_data; k++)
-            {
-                if(Debug_Mode)
-                {
-                    cout<<"pushing "<<data[k]<<endl;
-                }
-                lista.push_back(data[k]); //przypisanie okreslonej ilosci danych do listy
-            }
-            list<int>::iterator it;
             /*stoper start*/
             LONGLONG Frequency, CurrentTime, LastTime;
             double TimeScale;
@@ -147,20 +141,17 @@ void benchmark::test(list<int> lista, int initial,int steps, int repetitions, bo
             QueryPerformanceCounter( (LARGE_INTEGER*) &LastTime);
 
             //stoper mierzy czas dla tej petli
-
-            for (list<int>::iterator it=lista.begin(); it != lista.end(); ++it)
+            for(k=0; k<amount_of_data; k++)
             {
                 if(Debug_Mode)
                 {
-                    cout<<"liczba przed zmiana: "<<*it<<endl;
+                    cout<<"pushing "<<data[k]<<endl;
                 }
-                *it=*it*2;
-                if(Debug_Mode)
-                {
-                    cout<<"liczba po zmianie: "<<*it<<endl;
-                }
+                cell * tmp = new cell(data[k]);
+                stos->append(tmp); //przypisanie okreslonej ilosci danych do listy
             }
 
+            cout<<"---done pushing---"<<endl;
             QueryPerformanceCounter( (LARGE_INTEGER*) &CurrentTime);
             milisec = (CurrentTime-LastTime)*TimeScale;
             total_time[j]=milisec;
@@ -169,15 +160,27 @@ void benchmark::test(list<int> lista, int initial,int steps, int repetitions, bo
             {
                 cout<<"czas: "<<total_time[j]<<endl;
             }
-            /*stoper stop*/
-            for(int m=0; m<amount_of_data; m++)
+
+            if(Debug_Mode)
             {
-                lista.pop_back(); //oczyszczenie listy i przygotowanie do kolejnej fazy testu
+                cout<<"czas: "<<total_time[j]<<endl;
+            }
+            while(stos->get_stack()!=NULL)
+            {
                 if(Debug_Mode)
                 {
-                    cout<<"popping"<<endl;
+                    cout<<"Popping..."<<endl;
+                }
+                stos->pop();
+                if(Debug_Mode)
+                {
+                    cout<<"...done"<<endl;
                 }
             }
+            stos = new stack();
+
+            cout<<"---list refreshed---"<<endl;
+
             mean_time = mean_time/repetitions;
             if(Debug_Mode)
             {
@@ -207,3 +210,4 @@ void benchmark::test(list<int> lista, int initial,int steps, int repetitions, bo
     delete[] total_time;
     delete[] result_time;
 }
+#endif

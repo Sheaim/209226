@@ -2,7 +2,8 @@
 #include <cstdlib>
 #include <fstream>
 #include <string>
-#include <list>
+#include "queue.h"
+#include "cell.h"
 #include <ctime>
 #include <windows.h>
 #include "spine.h"
@@ -12,8 +13,9 @@
 
 int main()
 {
-    cout<<"Benchmark czasowy, wersja 0.1 alpha tailored"<<endl;
-    list<int> lista;
+    cout<<"Benchmark czasowy"<<endl;
+    queue * kolejka;
+    cout<<"Lista ok"<<endl;
     int initial=10;
     int steps=1;
     int repetitions=1;
@@ -22,8 +24,12 @@ int main()
     string input;
     int array_size=1;
     bool Debug_Mode = 0;
+
+    cout<<"***INIT DONE***"<<endl<<endl;
+
     while (finish!=1)
     {
+        kolejka;
         cout<<"Wybierz jedna z opcji:"<<endl<<"d/data/dane: zmien liczbe danych na ktorych bedzie pracowac program"<<endl;
         cout<<"s/steps/kroki: zmien liczbe krokow ktore wykona program w trakcie testu"<<endl;
         cout<<"r/repetitions/powtorzenia: zmien liczbe powtorzen w kazdym kroku"<<endl;
@@ -115,8 +121,12 @@ int main()
                 array_size = array_size*10;
             }
             benchmark* test1 = new benchmark(array_size, Debug_Mode);
+
+            cout<<"***BENCHMARK CREATED***"<<endl;
             test1->file(test1->generate_data(array_size, Debug_Mode),Debug_Mode);
-            test1->test(lista, initial, steps, repetitions, Debug_Mode);
+            cout<<"***DATA CREATED***"<<endl;
+            test1->test(kolejka, initial, steps, repetitions, Debug_Mode);
+            cout<<"***TEST DONE***"<<endl;
             delete test1;
             break;
         }
@@ -142,6 +152,7 @@ int main()
            cout<<"niewlasciwa opcja. Sprobuj ponownie"<<endl;
            }
         }
+        //delete lista;
     }
  return 0;
 }
