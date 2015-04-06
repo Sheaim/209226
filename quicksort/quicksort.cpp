@@ -8,33 +8,40 @@
 #include "quicksort/quicksort.h"
 #include "common/logger.h"
 
+const std::string wrong_value_error_message = "Error: array part is not a number.";
 
 void quicksort_number(int* collection)
 {
     int array_size;
     array_size = sizeof(collection)/sizeof(int);
     int pivot;
-    int* temp;
+    int* low;
+    int* high;
+    int counterOfLowArrayElements=0;
+    int counterOfHighArrayElements=0;
     for (int i=0; i<array_size; ++i)
     {
         pivot = collection[i];
     }
     pivot = pivot/array_size;
-    int* first_counter=&collection[0];
-    int* second_counter=&collection[array_size];
-    while(*first_counter<=*second_counter)
+    for(int i=0;i<array_size;i++)
     {
-        while(*first_counter<pivot)
+        if (collection[i]<=pivot)
         {
-            ++first_counter;
-            while(*second_counter>pivot)
-            {
-                --second_counter;
-            }
+            low[counterOfLowArrayElements]=collection[i];
+            ++counterOfLowArrayElements;
         }
-        temp = first_counter;
-        first_counter=second_counter;
-        second_counter=temp;
+        else
+            if(collection[i]>pivot)
+        {
+            high[counterOfHighArrayElements]=collection[i];
+            ++counterOfHighArrayElements;
+        }
+        else
+        {
+            std::cout<<wrong_value_error_message<<std::endl;
+            break;
+        }
     }
 }
 
