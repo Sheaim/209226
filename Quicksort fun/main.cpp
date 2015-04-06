@@ -1,6 +1,12 @@
 #include <iostream>
-#include <windows.h>
+// #include <windows.h>
 #include <fstream>
+#include <string>
+#include <assert.h>
+
+
+#include "common/logger.h"
+
 
 #include "Lista.hh"
 #include "Stos.hh"
@@ -21,23 +27,46 @@
 
 using namespace std;
 
-int main() {
+int benchmarkFillinUpStack()
+{
+    const char* nazwa_pliku="Pomiar_czasu.txt";
 
-    const char* nazwa_pliku="Pomiar_czasu3.txt";
-    fstream plik;
-    plik.open(nazwa_pliku,ios::out);
-    if(!plik.good())
+     Stos<int> *s=new Stos<int>;
+     unique_ptr<student::common::Logger> logger = new student::common::Logger( nazwa_pliku );
+
+     logger->log( "Powiekszanie o 1:" );
+     logger->log( "ilosc element.\tczas" );
+
+     for(int i=10;i<100001;i*=10)
+     {
+    	 logger->log( std::to_string( i ) + "ilosc element.\tczas" + std::to_string( licz(s,i) ) );
+     }
+
     {
-        cerr << "Blad otwarcia pliku." << endl;
-        return -1;
+        Stos<int> *s=new Stos<int>;
+
+        logger->log( "Powiekszanie 2x:" );
+        logger->log( "ilosc element.\tczas" );
+
+        for(int i=10;i<10000001;i*=10)
+        {
+        	logger->log( std::to_string( i ) + "ilosc element.\tczas" + std::to_string( licz200(s,i) ) );
+        }
     }
-    Stos<int> s;
-    int n=10;
-    cout << "Quicksort" << endl;
-    plik << "ilosc element.\tczas" << endl;
-    licz(s, n);
-    plik.close();
-    cout << "Zapisano." << endl;
-    system("PAUSE");
+    logger->log( "Zapisano." );
+
+    system("PAUSE"); // ????
+
     return 0;
 }
+
+
+
+int main()
+{
+    benchmarkFillinUpStack(); // TODO consider adding error handling
+
+    return 0;
+}
+
+// TODO use external testing framework

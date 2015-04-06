@@ -5,8 +5,8 @@
  *
  */
 #include <iostream>
-#include "quicksort.h"
-#include "logger.h"
+#include "quicksort/quicksort.h"
+#include "common/logger.h"
 
 
 void quicksort_number(int* collection)

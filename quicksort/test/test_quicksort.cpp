@@ -10,7 +10,7 @@
 #include <string>
 #include <fstream>
 
-#include "logger.h"
+#include "common/logger.h"
 #include "../catch.hpp"
 #include "../quicksort.h"
 
