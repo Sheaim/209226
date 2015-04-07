@@ -130,13 +130,10 @@ type* quicksort(type* collection, int array_lenght)
         quicksort(high, counterOfHighArrayElements);
     }
 
-
-
-    for(int i=0; i<array_lenght;++i)
-    {
-        collection[i] = merge_arrays<type>(low, counterOfLowArrayElements, high, counterOfHighArrayElements)[i];
+        collection = merge_arrays<type>(low, counterOfLowArrayElements, high, counterOfHighArrayElements);
 //        std::cout<<collection[i]<<" ";
-    }
+    delete low;
+    delete high;
 //    std::cout<<std::endl;
     return collection;
 }
