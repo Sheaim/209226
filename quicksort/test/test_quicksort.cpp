@@ -28,7 +28,7 @@ TEST_CASE( "quicksort sortSimpleArray", "[factorial]" ) {
 	int* result_tab = new int[tab_lenght];
 	// when
 	pLogger->log(testing_tab, tab_lenght);
-	result_tab = quicksort_number(testing_tab, tab_lenght);
+	result_tab = quicksort<int>(testing_tab, tab_lenght);
     pLogger->log(result_tab, tab_lenght);
     pLogger->log(expected_tab, tab_lenght);
 	// then
