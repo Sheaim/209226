@@ -1,56 +1,15 @@
 /*
- * quicksort.h
+ * quicksort.cpp
  * created on april 5 2015
  * author: sheaim
  *
  */
+#include <iostream>
+#include "quicksort/quicksort.h"
+#include "common/logger.h"
 
-
-
-#ifndef QUICKSORT_H_
-#define QUICKSORT_H_
-const std::string wrong_value_error_message = "Error: array part is not a number.";
-
-//As I cannot have templates in a .cpp file, they need to be defined in a 'h file (here).
-
-
-/*!
- * \param collection
- * \brief is an input array of 'type' elements, has a set lenght
- * \param array_lenght
- * \brief is the amount of elements that make up the 'collection' array
- *
- * \brief output 'collection' is an array of 'type' elements of lenght 'array_lenght'. The array is the sorted 'collection' array.
- */
-template<typename type>
-type* quicksort(type* collection,int array_lenght);
-/*!
- * \param low
- * \param high
- * \brief are input arrays of 'type' elements that will be merged into output array. They have set lenghts, but don't need to be of same lenght.
- * If an array has zero elements the other array is returned.
- * \param lowLenght
- * \param highLenght
- * \brief are lenghts of the low and high arrays. These numbers MUST match, else the whole thing will go to hell.
- *
- * \brief output 'mergedArray' is an array of 'type', lenght 'ArrayLenght' equal to sum of 'lowLenght' and 'highLenght'.
- * It's the result of merging arrays 'low' and 'high' with 'low's elements producing lower part of the array and 'high's elements producing the higher part.
- */
-template<typename type>
-type* merge_arrays(type* low, int lowLenght, type* high, int highLenght);
-
-template<typename type>
-type* merge_arrays(type* low, int lowArrayLenght, type* high, int highArrayLenght)
+int* merge_arrays_number(int* low, int lowArrayLenght, int* high, int highArrayLenght)
 {
-    if(lowArrayLenght==0)
-    {
-        return high;
-    }
-    if(highArrayLenght==0)
-    {
-        return low;
-    }
-    else
     std::cout<<"low array"<<std::endl;
     for(int i=0; i<lowArrayLenght;++i)
     {
@@ -58,7 +17,7 @@ type* merge_arrays(type* low, int lowArrayLenght, type* high, int highArrayLengh
     }
     std::cout<<std::endl;
     int mergedArrayLenght = lowArrayLenght+highArrayLenght;
-    type* mergedArray = new type[mergedArrayLenght];
+    int* mergedArray = new int[mergedArrayLenght];
     for(int i=0; i<lowArrayLenght;++i)
     {
         mergedArray[i] = low[i];
@@ -82,13 +41,11 @@ type* merge_arrays(type* low, int lowArrayLenght, type* high, int highArrayLengh
 }
 
 
-
-template<typename type>
-type* quicksort(type* collection, int array_lenght)
+int* quicksort_number(int* collection, int array_lenght)
 {
-    type pivot;
-    type* low = new type[array_lenght];
-    type* high = new type[array_lenght];
+    int pivot;
+    int* low = new int[array_lenght];
+    int* high = new int[array_lenght];
     int counterOfLowArrayElements=0;
     int counterOfHighArrayElements=0;
     for(int i=0; i<array_lenght;++i)
@@ -134,7 +91,7 @@ type* quicksort(type* collection, int array_lenght)
 
     for(int i=0; i<array_lenght;++i)
     {
-        collection[i] = merge_arrays<type>(low, counterOfLowArrayElements, high, counterOfHighArrayElements)[i];
+        collection[i] = merge_arrays(low, counterOfLowArrayElements, high, counterOfHighArrayElements)[i];
         std::cout<<collection[i]<<" ";
     }
     std::cout<<std::endl;
@@ -142,4 +99,3 @@ type* quicksort(type* collection, int array_lenght)
 }
 
 
-#endif // QUICKSORT_H_

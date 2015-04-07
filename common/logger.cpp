@@ -34,6 +34,11 @@ void Logger::log(std::string aLog) {
 	m_file << aLog << std::endl;
 }
 
+void Logger::log(double nLog) {
+	std::cout << nLog << std::endl;
+	m_file << nLog << std::endl;
+}
+
 void Logger::log(int* collection, int array_size)
 {
     for(int i=0; i<array_size; ++i)

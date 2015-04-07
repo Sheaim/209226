@@ -20,13 +20,13 @@ TEST_CASE( "logger logSimpleString", "[factorial]" ) {
 	std::auto_ptr<student::common::Logger> pLogger(new student::common::Logger(logFileName));
 
 	// given
-	std::string logEntry = "tralalala";
+	double logEntry = 123123;
 
 	// when
 	pLogger->log(logEntry);
 	// delete pLogger;
 
-	std::string logFileContent;
+	double logFileContent;
 
 	std::fstream logfile;
 

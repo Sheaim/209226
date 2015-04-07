@@ -29,6 +29,7 @@ public:
 public:
 	virtual void log(std::string aLog);
 	virtual void log(int* collection, int tabLenght);
+	virtual void log(double nLog);
 };
 
 }
