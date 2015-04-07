@@ -26,7 +26,7 @@ TEST_CASE ("benchmarking quicksortSimpleStack", "[factorial]")
     //given
     int testing_tab[5] = {5, 3, 2, 4, 1};
     int tab_lenght = sizeof(testing_tab)/sizeof(int);
-    benchmark_number* ptestBenchmark = new benchmark_number(testing_tab, tab_lenght);
+    benchmark_number<int>* ptestBenchmark = new benchmark_number<int>(testing_tab, tab_lenght);
     double time = 0;
 	// when
 	pLogger->log(testing_tab, tab_lenght);
@@ -35,7 +35,7 @@ TEST_CASE ("benchmarking quicksortSimpleStack", "[factorial]")
     pLogger->log(time);
 
     //then
-    REQUIRE(false);
+    REQUIRE(time!=0);
     //cleanup
 
 
