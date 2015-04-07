@@ -127,8 +127,8 @@ type* quicksort(type* collection, int array_lenght)
 
     if(counterOfLowArrayElements!=1)
     {
-        quicksort_number(low, counterOfLowArrayElements);
-        quicksort_number(high, counterOfHighArrayElements);
+        quicksort(low, counterOfLowArrayElements);
+        quicksort(high, counterOfHighArrayElements);
     }
 
 

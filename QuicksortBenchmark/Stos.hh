@@ -28,7 +28,14 @@ public:
     typ pop();
     int size()const;
     int size_licznik()const;
+    typ* getTab();
 };
+
+template<typename typ>
+typ* Stos<typ>::getTab()
+{
+    return tab;
+}
 
 /*!
  *\brief definicja konstruktora bezparametrycznego
