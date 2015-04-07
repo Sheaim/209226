@@ -108,29 +108,4 @@ double tm = performanceCountEnd.QuadPart - performanceCountStart.QuadPart;
 return tm;
 }
 
-
-/*!
- *\brief definicja funkcji zliczaj
- *Alternatywna funkcja benchamrkujaca
- *nie przeznaczona dla struktury danych Kolejka
- *\param [obiekt] struktura danych
- *\param [N]  ilosc liczb pseldolosowych, ktorymi zostanie wypelniona struktura danych
- *\return czas wykonania operacji podany w ms.
- *Funkcja nie wykorzystana w programie!!
- */
-template<typename typ>
-double zliczaj(typ obiekt, int N) // funkcja alternatywna
-{
-    time_t start, koniec;
-    double roznica;
-
-    start=clock();
-    for(int i=0;i<N;i++)
-        obiekt->push(rand()%9);
-
-    koniec=clock();
-    roznica=difftime(koniec,start);
-    return roznica;
-}
-
 #endif // STOPER_HH_INCLUDED

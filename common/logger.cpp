@@ -33,7 +33,10 @@ void Logger::log(std::string aLog) {
 	std::cout << aLog << std::endl;
 	m_file << aLog << std::endl;
 }
-
+void Logger::log(int cLog) {
+    std::cout << cLog << std::endl;
+	m_file << cLog << std::endl;
+}
 void Logger::log(double nLog) {
 	std::cout << nLog << std::endl;
 	m_file << nLog << std::endl;

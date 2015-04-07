@@ -50,34 +50,34 @@ type* merge_arrays(type* low, int lowArrayLenght, type* high, int highArrayLengh
     {
         return low;
     }
-    else
-    std::cout<<"low array"<<std::endl;
-    for(int i=0; i<lowArrayLenght;++i)
-    {
-        std::cout<<low[i]<<" ";
-    }
-    std::cout<<std::endl;
+//    else
+//    std::cout<<"low array"<<std::endl;
+//    for(int i=0; i<lowArrayLenght;++i)
+//    {
+//        std::cout<<low[i]<<" ";
+//    }
+//    std::cout<<std::endl;
     int mergedArrayLenght = lowArrayLenght+highArrayLenght;
     type* mergedArray = new type[mergedArrayLenght];
     for(int i=0; i<lowArrayLenght;++i)
     {
         mergedArray[i] = low[i];
     }
-    std::cout<<"high array"<<std::endl;
-    for(int i=0; i<highArrayLenght;++i)
-    {
-        std::cout<<high[i]<<" ";
-    }
-    std::cout<<std::endl;
+//    std::cout<<"high array"<<std::endl;
+//    for(int i=0; i<highArrayLenght;++i)
+//    {
+//        std::cout<<high[i]<<" ";
+//    }
+//    std::cout<<std::endl;
     for(int i=0; i<highArrayLenght;++i)
     {
         mergedArray[i+lowArrayLenght] = high[i];
     }
-    for(int i=0; i<mergedArrayLenght;++i)
-    {
-        std::cout<<mergedArray[i]<<" ";
-    }
-    std::cout<<std::endl;
+//    for(int i=0; i<mergedArrayLenght;++i)
+//    {
+//        std::cout<<mergedArray[i]<<" ";
+//    }
+//    std::cout<<std::endl;
     return mergedArray;
 }
 
@@ -91,12 +91,12 @@ type* quicksort(type* collection, int array_lenght)
     type* high = new type[array_lenght];
     int counterOfLowArrayElements=0;
     int counterOfHighArrayElements=0;
-    for(int i=0; i<array_lenght;++i)
-    {
-        std::cout<<collection[i]<<" ";
-    }
-    std::cout<<std::endl;
-    std::cout<<"finding pivot"<<std::endl;
+//    for(int i=0; i<array_lenght;++i)
+//    {
+//        std::cout<<collection[i]<<" ";
+//    }
+//    std::cout<<std::endl;
+//    std::cout<<"finding pivot"<<std::endl;
     pivot = 0;
     for (int i=0; i<array_lenght; ++i)
     {
@@ -107,7 +107,7 @@ type* quicksort(type* collection, int array_lenght)
     {
         if (collection[i]<=pivot)
         {
-            std::cout<<"adding "<<collection[i]<<"to low"<<std::endl;
+//            std::cout<<"adding "<<collection[i]<<"to low"<<std::endl;
             low[counterOfLowArrayElements]=collection[i];
             ++counterOfLowArrayElements;
         }
@@ -116,7 +116,7 @@ type* quicksort(type* collection, int array_lenght)
         {
             high[counterOfHighArrayElements]=collection[i];
             ++counterOfHighArrayElements;
-            std::cout<<"adding "<<collection[i]<<"to high"<<std::endl;
+//            std::cout<<"adding "<<collection[i]<<"to high"<<std::endl;
         }
         else
         {
@@ -124,20 +124,20 @@ type* quicksort(type* collection, int array_lenght)
             break;
         }
     }
-
-    if(counterOfLowArrayElements!=1)
+    if(counterOfLowArrayElements!=1&&counterOfHighArrayElements!=0)
     {
         quicksort(low, counterOfLowArrayElements);
         quicksort(high, counterOfHighArrayElements);
     }
 
 
+
     for(int i=0; i<array_lenght;++i)
     {
         collection[i] = merge_arrays<type>(low, counterOfLowArrayElements, high, counterOfHighArrayElements)[i];
-        std::cout<<collection[i]<<" ";
+//        std::cout<<collection[i]<<" ";
     }
-    std::cout<<std::endl;
+//    std::cout<<std::endl;
     return collection;
 }
 
