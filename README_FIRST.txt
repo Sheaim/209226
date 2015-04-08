@@ -1,4 +1,4 @@
-Compilation process is begun by setting up the enviroment for the compilator.
+Compilation process is begun by setting up the enviroment for the compiler.
 In case of Code::Blocks' mingw32 this is accomplished by running 
 mingwvars.bat in MinGW folder (see \build\setup.bat for an example)
 
