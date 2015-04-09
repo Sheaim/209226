@@ -114,9 +114,9 @@ type* quicksort(type* collection, int array_lenght)
 //    }
 //    std::cout<<std::endl;
 //    std::cout<<"finding pivot"<<std::endl;
-    a = collection[rand()%array_lenght]
-    b = collection[rand()%array_lenght]
-    c = collection[rand()%array_lenght]
+    int a = collection[rand()%array_lenght];
+    int b = collection[rand()%array_lenght];
+    int c = collection[rand()%array_lenght];
     pivot = max(min(a,b), min(max(a,b),c));
     for(int i=0; i<array_lenght; ++i)
     {
