@@ -81,6 +81,23 @@ type* merge_arrays(type* low, int lowArrayLenght, type* high, int highArrayLengh
     return mergedArray;
 }
 
+template<typename type>
+type min(type firstValue, type secondValue)
+{
+    if (firstValue>=secondValue)
+        return secondValue;
+    else
+        return firstValue;
+}
+
+template<typename type>
+type max(type firstValue, type secondValue)
+{
+    if (firstValue>=secondValue)
+        return firstValue;
+    else
+        return secondValue;
+}
 
 
 template<typename type>
@@ -97,12 +114,10 @@ type* quicksort(type* collection, int array_lenght)
 //    }
 //    std::cout<<std::endl;
 //    std::cout<<"finding pivot"<<std::endl;
-    pivot = 0;
-    for (int i=0; i<array_lenght; ++i)
-    {
-        pivot = pivot + collection[i];
-    }
-    pivot = pivot/array_lenght;
+    a = collection[rand()%array_lenght]
+    b = collection[rand()%array_lenght]
+    c = collection[rand()%array_lenght]
+    pivot = max(min(a,b), min(max(a,b),c));
     for(int i=0; i<array_lenght; ++i)
     {
         if (collection[i]<=pivot)
