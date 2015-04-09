@@ -31,6 +31,7 @@ public:
 	virtual void log(int* collection, int tabLenght);
 	virtual void log(double nLog);
 	virtual void log(int cLog);
+	virtual void log(unsigned int fLog);
 };
 
 }

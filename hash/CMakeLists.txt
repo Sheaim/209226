@@ -4,12 +4,12 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 add_subdirectory(test)
 include_directories (..)
-add_executable(quicksort_tests
-    quicksort_number.cpp
-    test/test_quicksort.cpp)
+add_executable(hash_tests
+    hash.cpp
+    test/test_hash.cpp)
 
 find_library(COMMON NAMES common PATHS "../common" NO_DEFAULT_PATH)
-target_link_libraries (quicksort_tests LINK_PUBLIC ${COMMON})
+target_link_libraries (hash_tests LINK_PUBLIC ${COMMON})
 
 enable_testing()
-add_Test(NAME quicksortTest COMMAND quicksort_tests)
+add_Test(NAME hashTest COMMAND hash_tests)
