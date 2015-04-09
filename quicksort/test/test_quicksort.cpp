@@ -11,7 +11,7 @@
 #include <fstream>
 
 #include "common/logger.h"
-#include "../catch.hpp"
+#include "common/catch.hpp"
 #include "../quicksort_number.h"
 
 TEST_CASE( "quicksort sortSimpleArray", "[factorial]" ) {
