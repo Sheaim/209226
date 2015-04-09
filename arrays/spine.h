@@ -24,7 +24,6 @@ class benchmark
 
 benchmark::~benchmark(){
     delete [] data;
-    delete data;
 }
 
 benchmark::benchmark(int array_size, bool Debug_Mode)

@@ -97,7 +97,6 @@ void darray::resize(int increase, bool DM)
     if(DM){cout<<"resizing array..."<<endl;}
     size = size+increase;
     delete[] tab;
-    delete tab;
     tab = new int[size];
     if(increase>=0)
     {
@@ -115,7 +114,6 @@ void darray::resize(int increase, bool DM)
     }
     if(DM){cout<<"...done"<<endl;}
     delete[] temp;
-    delete temp;
 }
 darray::darray(int init, bool DM)
 {
@@ -128,6 +126,5 @@ darray::darray(int init, bool DM)
 darray::~darray()
 {
     delete[] tab;
-    delete tab;
 }
 #endif // ARRAY1H
