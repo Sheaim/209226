@@ -12,5 +12,7 @@ so that the version you want to run is named CMakeLists. This has to be done by 
 CAUTION: QuicksortBenchmark is dependent on quicksort. Also - versions of the programs that do not use templates have their functions/members defined 
 in additional .cpp files, while those that do use them are contained in a single header file.
 
+WARNING: common folder HAS to be built first, as it generates a library which most other programs reference to!
+
 These files are composed specifically for my machines and may need tweaking if you're using a different compiler.
 Consult cmake manual for further details.
