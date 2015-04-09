@@ -141,8 +141,8 @@ type* quicksort(type* collection, int array_lenght)
     }
     if(counterOfLowArrayElements!=1&&counterOfHighArrayElements!=0)
     {
-        quicksort(low, counterOfLowArrayElements);
-        quicksort(high, counterOfHighArrayElements);
+        low = quicksort(low, counterOfLowArrayElements);
+        high = quicksort(high, counterOfHighArrayElements);
     }
 
         collection = merge_arrays<type>(low, counterOfLowArrayElements, high, counterOfHighArrayElements);

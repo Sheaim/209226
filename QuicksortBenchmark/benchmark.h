@@ -104,6 +104,7 @@ double benchmark_number<type>::runBenchmark()
     {
         arrayStack->push200(temp[i]); //using most efficient method provided by data structure
     }
+    delete temp;
     timer = performanceCountEnd.QuadPart - performanceCountStart.QuadPart; //acquire time difference
     return timer;
 }
@@ -115,7 +116,7 @@ template <typename type>
 void benchmark_number<type>::changeArray(type* newArray, int newArraylength)
 {
     delete arrayStack;
-    arrayStack = new Stos<type>;
+    arrayStack = new Stos<type>();
     for(int i=0; i<newArraylength; ++i)
     {
         arrayStack->push200(newArray[i]);

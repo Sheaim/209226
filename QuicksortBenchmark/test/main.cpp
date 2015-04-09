@@ -36,7 +36,7 @@ TEST_CASE ("benchmarking quicksortBigArray", "[factorial]")
     double time =0;
     //runtime
     std::cout<<"Number of elements: "<<N<<std::endl;
-    for(int i=0;i<4;++i)
+    for(int i=0;i<6;++i)
     {
         testing_tab = new int[N];
         tab_lenght = N;
