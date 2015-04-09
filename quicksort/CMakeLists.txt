@@ -5,7 +5,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 add_subdirectory(test)
 include_directories (..)
 add_executable(quicksort_tests
-    quicksort.cpp
     test/test_quicksort.cpp)
 
 find_library(COMMON NAMES common PATHS "../common" NO_DEFAULT_PATH)

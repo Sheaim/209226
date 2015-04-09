@@ -9,5 +9,8 @@ Afterwards the project is compiled using mingw32-make.exe command and run using 
 To compile different version of the project (e.g. the worse version of quicksort) you need to exchange the names of CMakeLists files 
 so that the version you want to run is named CMakeLists. This has to be done by hand as there is no .bat file to automate this process.
 
+CAUTION: QuicksortBenchmark is dependent on quicksort. Also - versions of the programs that do not use templates have their functions/members defined 
+in additional .cpp files, while those that do use them are contained in a single header file.
+
 These files are composed specifically for my machines and may need tweaking if you're using a different compiler.
 Consult cmake manual for further details.
