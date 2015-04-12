@@ -18,7 +18,6 @@ TEST_CASE( "logger logSimpleString", "[factorial]" ) {
 	// pre
 	const std::string logFileName = "lolz.txt";
 	std::auto_ptr<student::common::Logger> pLogger(new student::common::Logger(logFileName));
-	std::auto_ptr<student::common::Reader> pReader(new student::common::Reader(logFileName));
 
 	// given
 	double logEntry = 123123;
