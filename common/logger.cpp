@@ -41,7 +41,10 @@ void Logger::log(double nLog) {
 	std::cout << nLog << std::endl;
 	m_file << nLog << std::endl;
 }
-
+void Logger::log(unsigned int fLog) {
+    std::cout<<fLog<<std::endl;
+    m_file<<fLog<<std::endl;
+}
 void Logger::log(int* collection, int array_size)
 {
     for(int i=0; i<array_size; ++i)
