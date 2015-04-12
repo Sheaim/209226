@@ -22,8 +22,9 @@ unsigned int Hash::h(std::string &toHash)
     {
         out *= seed;
         out += *in;
-        out = out%sizeof(int);
+        out = out%1024;
         ++in;
     }
     return out;
 }
+
