@@ -14,10 +14,10 @@ Hash::~Hash()
     seed = 0;
 }
 
-unsigned int Hash::h(std::string &toHash)
+int Hash::h(std::string &toHash)
 {
     const char* in = toHash.c_str();
-    unsigned int out=0;
+    int out=0;
     while(*in!=NULL)
     {
         out *= seed;

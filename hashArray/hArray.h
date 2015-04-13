@@ -5,9 +5,27 @@
 #include <iostream>
 #include <string>
 
-#include
+#include "hash/hash.h"
+#include "list/list2.h"
 
 
+class HArray
+{
+private:
+    dllist* hashedValues;
+    Hash* Coder;
+
+public:
+    HArray();
+    virtual ~HArray();
+
+public:
+    virtual void add(std::string key, int value); //Will reassign value to given
+    virtual void add(std::string key); //This one, in stead of changing the value assigned to key will increase it by one
+    virtual void remove(std::string key); //Will remove entry with given key
+    virtual void printHArray();
+    virtual Cell* findKey(std::string key);
+};
 
 
 

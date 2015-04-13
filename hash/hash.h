@@ -12,6 +12,6 @@ private:
 public:
     Hash();
     virtual ~Hash();
-    virtual unsigned int h(std::string &toHash);
+    virtual int h(std::string &toHash);
 };
 #endif

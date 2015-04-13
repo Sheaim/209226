@@ -6,7 +6,10 @@ add_subdirectory(test)
 include_directories (..)
 add_executable(hArray_tests
     hArray.cpp
-    test/test_hArray.cpp)
+    test/test_hArray.cpp
+    ../hash/hash.cpp
+    ../list/list2.cpp
+    ../list/cell.cpp)
 
 find_library(COMMON NAMES common PATHS "../common" NO_DEFAULT_PATH)
 target_link_libraries (hArray_tests LINK_PUBLIC ${COMMON})

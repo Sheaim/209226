@@ -25,7 +25,7 @@ TEST_CASE ("simple hasher function", "[factorial]")
     //given
     std::string testString = "test string";
     Hash* Hasher = new Hash();
-    unsigned int result = 0;
+    int result = 0;
     //when
     std::fstream readfile;
     readfile.open(readFileName, std::fstream::in);
