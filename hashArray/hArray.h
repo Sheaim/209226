@@ -12,7 +12,7 @@
 class HArray
 {
 private:
-    dllist* hashedValues;
+    dllist* hashedValues[1024];
     Hash* Coder;
 
 public:

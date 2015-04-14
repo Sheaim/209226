@@ -3,7 +3,6 @@
 #include <iostream>
 #include <math.h>
 #include "cell.h"
-using namespace std;
 
 class dllist{
 

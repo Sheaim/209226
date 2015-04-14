@@ -25,8 +25,8 @@ Cell::~Cell(){
 }
 
 Cell::Cell(std::string newKey, int newValue){
-	this->value = newValue;
-	this->key = newKey;
+	value = newValue;
+	key = newKey;
 	next=NULL;
 	prev=NULL;
 }

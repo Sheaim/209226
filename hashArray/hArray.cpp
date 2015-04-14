@@ -7,13 +7,20 @@
 
 HArray::HArray()
 {
-    hashedValues = new dllist[1024]();
+    for(int i=0; i<1024; ++i)
+    {
+        hashedValues[i] = new dllist();
+    }
+
     Coder = new Hash();
 }
 
 HArray::~HArray()
 {
-    delete[] hashedValues;
+    for(int i=0; i<1024; ++i)
+    {
+        delete hashedValues[i];
+    }
     delete Coder;
 }
 
@@ -25,13 +32,13 @@ HArray::~HArray()
 Cell* HArray::findKey(std::string key)
 {
     int index = Coder->h(key);
-    Cell* current = hashedValues[index].get_list();
+    Cell* current = hashedValues[index]->get_list();
     while(current!=NULL)
     {
-        if(key!=current->get_key())
+        if(key==current->get_key())
             return current;
         else
-            current->get_next();
+            current = current->get_next();
     }
     return NULL;
 }
@@ -45,10 +52,18 @@ void HArray::add(std::string key, int value)
 {
     Cell* newCell = new Cell(key, value);
     int index = Coder->h(key);
-    if(findKey(key)!=NULL)
-        findKey(key)->set_value(value);
+    int newValue;
+    if(findKey(key)==NULL)
+    {
+        hashedValues[index]->append(newCell);
+    }
     else
-        hashedValues[index].append(newCell);
+    {
+        newValue = findKey(key)->get_value()+value;
+        findKey(key)->set_value(newValue);
+    }
+    delete newCell;
+
 }
 
 /*!
@@ -57,7 +72,16 @@ void HArray::add(std::string key, int value)
 void HArray::add(std::string key)
 {
     int value = 1;
-    this->add(key, value);
+    int index = Coder->h(key);
+    if(findKey(key)!=NULL)
+        {
+            findKey(key)->set_value(findKey(key)->get_value()+value);
+        }
+    else
+        {
+            Cell* newCell = new Cell(key, value);
+            hashedValues[index]->append(newCell);
+        }
 }
 
 /*!
@@ -67,23 +91,33 @@ void HArray::remove(std::string key)
 {
     int index = Coder->h(key);
     int i=0;
-    Cell* current = hashedValues[index].get_list();
+    Cell* current = hashedValues[index]->get_list();
     while(current!=NULL)
     {
         if(key!=current->get_key())
            {
-               current->get_next();
+                current->get_next();
                 ++i;
            }
         else break;
     }
-    hashedValues[index].delete_Cell(i);
+    hashedValues[index]->delete_Cell(i);
 }
 
 void HArray::printHArray()
 {
+    Cell* current;
     for(int i=0;i<1024;i++)
     {
-        hashedValues[i].print_list();
+        if(hashedValues[i]->get_list()!=NULL)
+        {
+            current = hashedValues[i]->get_list();
+            while(current!=NULL)
+            {
+                std::cout<<current->get_key()<<": "<<current->get_value()<<" ";
+                current=current->get_next();
+            }
+            std::cout<<std::endl;
+        }
     }
 }

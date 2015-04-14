@@ -18,12 +18,11 @@ int Hash::h(std::string &toHash)
 {
     const char* in = toHash.c_str();
     int out=0;
-    while(*in!=NULL)
+    for(int i=0; i<toHash.length(); ++i)
     {
         out *= seed;
-        out += *in;
+        out += in[i];
         out = out%1024;
-        ++in;
     }
     return out;
 }

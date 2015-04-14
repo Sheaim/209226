@@ -7,11 +7,10 @@ void dllist::print_list(){
 	Cell * current=first;
 
 	while(current!=NULL){
-		cout<<current->get_value()<<" ";
+		std::cout<<current->get_key()<<": "<<current->get_value()<<" ";
 		current=current->get_next();
 	}
-
-	cout<<endl;
+	std::cout<<std::endl;
 }
 
 /* Usuwa element o zadanym indeksie */
@@ -19,7 +18,7 @@ void dllist::print_list(){
 
 int dllist::delete_Cell(int index){
 
-	cout<<"^Deleting Cell nr "<<index<<"^"<<endl;
+	std::cout<<"^Deleting Cell nr "<<index<<"^"<<std::endl;
 
 	Cell * destination = first;
 
@@ -78,8 +77,7 @@ dllist::~dllist(){
 		rubbish=rubbish->get_next();
 	}
 
-	cout<<"^mam ostania komorke^"<<endl;
-    Cell * temp = rubbish;
+	std::cout<<"^mam ostania komorke^"<<std::endl;
 //znajdŸ jej rodzica i usuñ
 	while(rubbish_parent!=first){
 		rubbish_parent = rubbish->get_prev();
@@ -95,22 +93,21 @@ dllist::~dllist(){
 
 void dllist::append(Cell * other){
 
-	if(this->first==NULL){
-		this->first=other;
-		return;
+	if(first==NULL){
+		first=other;
 	}
+    else
+    {
+        Cell * destination = first;
 
-	Cell * destination = first;
+        while(destination->get_next()!=NULL){
+            destination=destination->get_next();
+        }
 
-	while(destination->get_next()!=NULL){
-		destination=destination->get_next();
-	}
-
-	destination->set_next(other);
-	other->set_prev(destination);
-
-	size++;
-
+        destination->set_next(other);
+        other->set_prev(destination);
+    }
+    size++;
 }
 
 /* Wstawia element w wyznaczone miejsce */
