@@ -13,17 +13,41 @@
 #include "common/catch.hpp"
 #include "common/logger.h"
 #include "../sort.h"
+#include "../Stoper.hh"
 
-TEST_CASE( "logger logSimpleString", "[factorial]" ) {
-
+TEST_CASE( "sorter sortSimpleArrays", "[factorial]" ) {
+//pre
+    const std::string logFileName = "lolz.txt";
+	std::auto_ptr<student::common::Logger> pLogger(new student::common::Logger(logFileName));
+	LARGE_INTEGER performanceCountStart,performanceCountEnd;
+    double tm;
+    double time = 0;
+    CombSorter* pCombSorter;
+//given
     int arrayLength = 10;
+//when
 
     for (int i=0; i<5; i++)
     {
-        arrayLength *= 10;
-        CombSorter* pCombSorter = new CombSorter(arrayLength);
-        pCombSorter->generateArray();
-        pCombSorter->combSort();
+        for(int i=0; i<5; i++)
+        {
+            arrayLength *= 10;
+            pCombSorter = new CombSorter(arrayLength);
+            pCombSorter->generateArray();
+            performanceCountStart = startTimer();
+            pCombSorter->combSort();
+            performanceCountEnd = endTimer();
+            tm = performanceCountEnd.QuadPart - performanceCountStart.QuadPart;
+            time = time +tm;
+            delete pCombSorter;
+        }
+        time = time/5;
+        pLogger->log("number of elements: ");
+        pLogger->log(arrayLength);
+        pLogger->log("time");
+        pLogger->log(time);
     }
+//then
     REQUIRE(false);
+//cleanup
 }
