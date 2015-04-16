@@ -25,11 +25,11 @@ wykonuje siê powy¿sze w pêtli dziel¹c rozpiêtoœæ przez 1.3 do czasu, gdy rozpiêt
 Przeprowadzono testy przy pomocy biblioteki windows.h i zestawu funkcji dostêpnych w pliku Stoper.hh, aby zmierzyæ czas sortowania dla tablic o ró¿nych rozmiarach. Wyniki s¹ nastêpuj¹ce:
 
 Iloœæ elementów | czas
-     100        | 173
-    1000        | 650
-   10000        | 12707
-  100000        | 98490
- 1000000        | 1116850
+     100        | 187.8
+    1000        | 1367.2
+   10000        | 24833.6
+  100000        | 249892
+ 1000000        | 1456250
 
-Z³o¿onoœæ zaimplementowanego algorytmu dla ma³ych iloœci elementów jest wiêc rzêdu O(nlogn) zaœ dla du¿ych iloœci elementów zbli¿a siê do O(n^2). Jest to zgodne z teoretyzowanymi wartoœciami dla których w wariancie pesymistycznym z³o¿onoœæ algorytmu wynosi w³aœnie O(n^2).
+Z³o¿onoœæ zaimplementowanego algorytmu dla ma³ych iloœci elementów jest wiêc rzêdu O(nlogn) zaœ dla du¿ych iloœci elementów zbli¿a siê do O(n). Jest to zgodne z teoretyzowanymi wartoœciami dla których w wariancie pesymistycznym z³o¿onoœæ algorytmu wynosi O(n^2), w wariancie optymistycznym O(n) zaœ przeciêtnie O(nlogn).
 ----------------------------

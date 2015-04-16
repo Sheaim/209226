@@ -29,23 +29,24 @@ TEST_CASE( "sorter sortSimpleArrays", "[factorial]" ) {
 
     for (int i=0; i<5; i++)
     {
+        time = 0;
+        arrayLength *= 10;
+        pCombSorter = new CombSorter(arrayLength);
         for(int i=0; i<5; i++)
         {
-            arrayLength *= 10;
-            pCombSorter = new CombSorter(arrayLength);
             pCombSorter->generateArray();
             performanceCountStart = startTimer();
             pCombSorter->combSort();
             performanceCountEnd = endTimer();
             tm = performanceCountEnd.QuadPart - performanceCountStart.QuadPart;
             time = time +tm;
-            delete pCombSorter;
         }
         time = time/5;
         pLogger->log("number of elements: ");
         pLogger->log(arrayLength);
-        pLogger->log("time");
+        pLogger->log("time: ");
         pLogger->log(time);
+        delete pCombSorter;
     }
 //then
     REQUIRE(false);
