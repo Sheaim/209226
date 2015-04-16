@@ -15,5 +15,11 @@
 #include "../sort.h"
 
 TEST_CASE( "logger logSimpleString", "[factorial]" ) {
-REQUIRE(false);
+
+    int arrayLength = 10;
+    CombSorter* pCombSorter = new CombSorter(arrayLength);
+    pCombSorter->generateArray();
+    pCombSorter->combSort();
+
+    REQUIRE(pCombSorter->checkIfSorted());
 }
