@@ -17,9 +17,13 @@
 TEST_CASE( "logger logSimpleString", "[factorial]" ) {
 
     int arrayLength = 10;
-    CombSorter* pCombSorter = new CombSorter(arrayLength);
-    pCombSorter->generateArray();
-    pCombSorter->combSort();
 
-    REQUIRE(pCombSorter->checkIfSorted());
+    for (int i=0; i<5; i++)
+    {
+        arrayLength *= 10;
+        CombSorter* pCombSorter = new CombSorter(arrayLength);
+        pCombSorter->generateArray();
+        pCombSorter->combSort();
+    }
+    REQUIRE(false);
 }
