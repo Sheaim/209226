@@ -14,19 +14,20 @@
 class Observer
 {
 private:
-	std::auto_ptr<student::common::Logger> pLogger(new student::common::Logger(logFileName));
-    double* timer_data;
+    std::string logFileName;
+    student::common::Logger* pLogger;
+    double* timerData;
+    int numberOfDataEntries;
+    double start;
+    double stop;
 
 public:
     Observer();
     virtual ~Observer();
 
 public:
-    virtual void timer_start();
-    virtual void timer_stop();
-    virtual void log_timer();
+    virtual void triggerTimer();
+    virtual void logTimer();
+    virtual void reset();
 };
-
-
-
 #endif
