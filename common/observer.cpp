@@ -67,3 +67,8 @@ void Observer::reset()
     delete[] timerData;
     numberOfDataEntries = -1;
 }
+
+double* Observer::GiveTimerData()
+{
+    return timerData;
+}

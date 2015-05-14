@@ -29,5 +29,6 @@ public:
     virtual void triggerTimer();
     virtual void logTimer();
     virtual void reset();
+    virtual double* giveTimerData();
 };
 #endif
