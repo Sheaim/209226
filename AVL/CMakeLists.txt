@@ -7,7 +7,7 @@ include_directories (..)
 add_executable(AVL_tests
     test/test_AVL.cpp
     AVL.cpp
-    cell.cpp	
+    cell.cpp
 )
 
 find_library(COMMON NAMES common PATHS "../common" NO_DEFAULT_PATH)

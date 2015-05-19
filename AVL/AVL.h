@@ -1,13 +1,34 @@
 /*
- * quicksort.h
+ * AVL.h
  * created on may 18 2015
  * author: sheaim
  *
  */
 
-
-
+#include "cell.h"
 #ifndef AVL_H_
 #define AVL_H_
+
+class BTree
+{
+    protected:
+        virtual void rotateRight(Cell* N);
+        virtual void rotateLeft(Cell* N);
+        virtual void checkTreeBalance(Cell* Node);
+    private:
+        Cell* Root;
+        int treeBalance;
+    public:
+        //generic constructor for creating an empty tree
+        BTree();
+        virtual ~BTree();
+
+    public:
+        virtual void addNode(int key);
+        virtual void deleteNode(Cell* node);
+        virtual Cell* retrieveNode(int key);
+};
+
+
 
 #endif // AVL_H_
