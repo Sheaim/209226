@@ -58,7 +58,7 @@ void BTree::rotateLeft(Cell* N)
 void BTree::checkTreeBalance(Cell* Node)
 {
     if(Node==NULL)
-        treeBalance=0;
+        return;
     else
     {
         if(Node->getRChild()!=NULL)
@@ -66,17 +66,61 @@ void BTree::checkTreeBalance(Cell* Node)
                 treeBalance+=Node->getRChild()->getBalance();
                 checkTreeBalance(Node->getRChild());
             }
+            else
+                {
+                    treeBalance--;
+                }
         if(Node->getLChild()!=NULL)
             {
                 treeBalance+=Node->getLChild()->getBalance();
                 checkTreeBalance(Node->getLChild());
             }
+            else
+                {
+                    treeBalance++;
+                }
     }
 }
 
-void BTree::addNode(int key)
+void BTree::addNode(int key, Cell* subRoot)
 {
-
+    Cell* Node = new Cell(key);
+    Cell* Tmp = subRoot;
+    if(Tmp->getKey()<=key)
+    {
+        if (Tmp->getLChild()==NULL)
+            {
+                Tmp->setLChild(Node);
+            }
+            else
+            {
+                delete Node;
+                addNode(key, Tmp->getLChild());
+            }
+    }
+    else
+    {
+        if (Tmp->getRChild()==NULL)
+            {
+                Tmp->setRChild(Node);
+            }
+            else
+            {
+                delete Node;
+                addNode(key, Tmp->getRChild());
+            }
+    }
+    checkTreeBalance(Tmp);
+    while(treeBalance<=-2)
+    {
+        rotateLeft(Tmp);
+        checkTreeBalance(Tmp);
+    }
+    while(treeBalance<=2)
+    {
+        rotateRight(Tmp);
+        checkTreeBalance(Tmp);
+    }
 }
 
 void BTree::deleteNode(Cell* node)

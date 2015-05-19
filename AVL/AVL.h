@@ -24,7 +24,7 @@ class BTree
         virtual ~BTree();
 
     public:
-        virtual void addNode(int key);
+        virtual void addNode(int key, Cell* subRoot);
         virtual void deleteNode(Cell* node);
         virtual Cell* retrieveNode(int key);
 };
