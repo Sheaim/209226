@@ -6,13 +6,17 @@ Cell::Cell(int newValue)
     childRight = NULL;
     childLeft = NULL;
     key = newValue;
+    balance = 0;
 }
 
 Cell::~Cell()
 {}
 
 //setters
-
+void Cell::resetParent()
+{
+    parent = NULL;
+}
 void Cell::setParent(Cell* newParent)
 {
     parent = newParent;
@@ -31,7 +35,14 @@ void Cell::setRChild(Cell* newChild)
     childRight = newChild;
     newChild->setParent(this);
 }
-
+void Cell::setLChild()
+{
+    childLeft = NULL;
+}
+void Cell::setRChild()
+{
+    childRight = NULL;
+}
 void Cell::checkNodeBalance()
 {
     if (childRight == NULL && childLeft == NULL || childRight != NULL && childLeft != NULL)

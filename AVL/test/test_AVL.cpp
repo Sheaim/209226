@@ -21,7 +21,16 @@ TEST_CASE( "AVL binary tree, simple test", "[factorial]" ) {
     const std::string logFileName = "lolz.txt";
 	std::auto_ptr<student::common::Logger> pLogger(new student::common::Logger(logFileName));
 	// given
+	BTree* testingTree = new BTree();
+	int n;
 	// when
+	for(int i=0;i<10;++i)
+    {
+        n = rand()%10;
+        testingTree->addNode(n, testingTree->getRoot());
+        std::cout<<"nodes added"<<std::endl;
+    }
+    delete testingTree;
 	// then
-        REQUIRE(false);
+    REQUIRE(false);
 }

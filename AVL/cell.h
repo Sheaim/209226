@@ -23,6 +23,9 @@ class Cell
     public:
         virtual void setLChild(Cell* newChild);
         virtual void setRChild(Cell* newChild);
+        virtual void setLChild();
+        virtual void setRChild();
+        virtual void resetParent();
 //getters;
     public:
         virtual Cell* getLChild();
