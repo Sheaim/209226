@@ -8,14 +8,6 @@ Cell::Cell(int newValue)
     value = newValue;
 }
 
-Cell::Cell(int newValue, Cell* newParent)
-{
-    parent = newParent;
-    childRight = NULL;
-    childLeft = NULL;
-    value = newValue;
-}
-
 Cell::~Cell()
 {}
 
@@ -30,24 +22,15 @@ void Cell::setParent(Cell* newParent)
 }
 //Should the appropriate "child" spot be taken the method will return 1 rather than do anything this is so the algorithm that makes the tree knows the spot is taken.
 //In addition to that, the child's "parent" pointer is set properly.
-bool Cell::setChild(Cell* newChild)
+//To add the cell to a tree you need to call the right method and add the child using the "setChild" method. We DON'T want anyone to call setParent, as this would have unforseen consequences.
+bool Cell::setLChild(Cell* newChild)
 {
-    if ((this->childLeft!=NULL && (this->childRight!=NULL || this->value < newChild->value)) || (this->childRight!=NULL && this->value >= newChild->value))
-        {
-            return 1;
-        }
-    else
-        if(this->value >= newChild->value)
-        {
-            this->childLeft = newChild;
-            newChild->setParent(this);
-            return 0;
-        }
-    else
-        if(this->value < newChild->value)
-        {
-           this->childRight = newChild;
-           newChild->setParent(this);
-           return 0;
-        }
+    childLeft = newChild;
+    newChild->setParent(this);
+}
+
+bool Cell::setRChild(Cell* newChild)
+{
+    childRight = newChild;
+    newChild->setParent(this);
 }

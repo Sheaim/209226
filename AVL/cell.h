@@ -6,6 +6,7 @@ class Cell
 {
     protected:
         Cell();
+        virtual void setParent(Cell* newParent);
     private:
         Cell* parent;
         int value;
@@ -13,10 +14,9 @@ class Cell
         Cell* childLeft;
     public:
         Cell(int newValue);
-        Cell(int newValue, Cell* newParent);
         virtual ~Cell();
         virtual int getValue();
-        virtual void setParent(Cell* newParent);
-        virtual bool setChild(Cell* newChild);
+        virtual bool setLChild(Cell* newChild);
+        virtual bool setRChild(Cell* newChild);
 };
 #endif // CELL_H_
