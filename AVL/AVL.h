@@ -5,30 +5,43 @@
  *
  */
 
-#include "cell.h"
+
 #ifndef AVL_H_
 #define AVL_H_
 
-class BTree
-{
-    protected:
-        virtual void rotateRight(Cell* N);
-        virtual void rotateLeft(Cell* N);
-        virtual void checkTreeBalance(Cell* Node);
-    private:
-        Cell* Root;
-        int treeBalance;
-    public:
-        //generic constructor for creating an empty tree
-        BTree();
-        virtual ~BTree();
+#include <iostream>
+#include <string>
+#include "node.h"
 
-    public:
-        virtual Cell* getRoot();
-        virtual void addNode(int key, Cell* subRoot);
-        virtual void deleteNode(Cell* node);
-        virtual Cell* RetrieveNode(int key, Cell* subRoot);
-        virtual void RebalanceTree(Cell* Node);
+class AVLTree {
+private:
+
+    Node* root;
+    virtual void push(const int & n, Node * & v);
+    virtual bool search( const int& s, Node * & tree) ;
+public:
+    AVLTree();
+    virtual ~AVLTree();
+
+    virtual Node* getRoot();
+    virtual void push(const int & n);
+
+    virtual void printPreOrder() const;
+    virtual void preOrder(Node* pre) const;
+
+    virtual void clear(Node* & tree);
+
+    //rotations
+    virtual void singleRightRotate(Node * & n);
+    virtual void doubleRightRotate(Node * & n);
+    virtual void singleLeftRotate(Node * & n);
+    virtual void doubleLeftRotate(Node * & n);
+
+    //search and utility functions
+    virtual bool search(const int & s);
+    virtual int avlHeight (Node * h);
+    virtual int max(int v1, int v2);
+    virtual void print(Node *node, int level);
 };
 
 

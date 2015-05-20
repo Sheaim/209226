@@ -4,276 +4,210 @@
  * author: sheaim
  *
  */
-#include <iostream>
-#include "AVL/AVL.h"
-#include "AVL/cell.h"
-#include "common/logger.h"
 
-BTree::BTree()
+ #include "AVL.h"
+
+AVLTree::AVLTree()
 {
-    Root = NULL;
-    treeBalance = 0;
+    root = NULL;
+
 }
 
-BTree::~BTree()
+AVLTree::~AVLTree()
 {
-    while(Root!=NULL)
-    {
-        deleteNode(Root);
-        std::cout<<"node deleted"<<std::endl;
-    }
+    clear(root);
 }
 
-void BTree::rotateRight(Cell* N)
+void AVLTree::push(const int & n)
 {
-    std::cout<<"Rotating right"<<std::endl;
-    Cell* rotated = N->getRChild();
-    std::cout<<"..."<<std::endl;
-    Cell* B = N->getRChild()->getLChild();
-    std::cout<<"..."<<std::endl;
-    if(N==Root)
+    push(n,root);
+}
+
+void AVLTree::singleRightRotate(Node * & n)
+{
+    Node * temp;
+    temp = n->right;
+    n->right = temp->left;
+    temp->left = n;
+    n = temp;
+    n->height = max(avlHeight(n->left),avlHeight(n->right)) + 1;
+    temp->height = max(n->height,avlHeight(temp->right)) + 1;
+
+
+}
+
+void AVLTree::singleLeftRotate(Node * & n)
+{
+    Node * temp;
+    temp = n->left;
+    n->left = temp->right;
+    temp->right = n;
+    n = temp;
+    n->height = max(avlHeight(n->left),avlHeight(n->right)) + 1;
+    temp->height = max(avlHeight(temp->left),n->height) + 1;
+}
+
+void AVLTree::doubleRightRotate(Node * & n)
+{
+    singleLeftRotate(n->right);
+    singleRightRotate(n);
+}
+
+void AVLTree::doubleLeftRotate(Node * & n)
+{
+    singleRightRotate(n->left);
+    singleLeftRotate(n);
+}
+
+int AVLTree::max(int v1, int v2)
+{
+    return ((v1 > v2) ? v1 : v2);
+}
+
+int AVLTree::avlHeight(Node * h)
+{
+    int n;
+    if( h == NULL)
     {
-        std::cout<<"new root: "<<N->getRChild()->getKey()<<std::endl;
-        Root = N->getRChild();
-        std::cout<<"..."<<std::endl;
-        Root->setLChild(N);
-        std::cout<<"..."<<std::endl;
-        Root->resetParent();
-        std::cout<<"...done"<<std::endl;
+        return -1;
     }
     else
     {
-        if(N==N->getParent()->getLChild())
-        {
-            std::cout<<"setting Lchild"<<std::endl;
-            N->getParent()->setLChild(rotated);
-            rotated->setLChild(N);
-        }
-        else
-        {
-            std::cout<<"setting Lchild"<<std::endl;
-            N->getParent()->setRChild(rotated);
-            rotated->setLChild(N);
-        }
-        if(B!=NULL)
-        {
-            std::cout<<"setting Rchild"<<std::endl;
-            N->setRChild(B);
-        }
+        n = h->height;
+        return n;
     }
-    std::cout<<"rebalancing finished"<<std::endl;
+
 }
 
-void BTree::rotateLeft(Cell* N)
+
+bool AVLTree::search(const int& s, Node *& tree)
 {
-    Cell* rotated = N->getLChild();
-    Cell* B = N->getLChild()->getRChild();
-    if(N==N->getParent()->getLChild())
+    if(tree == NULL)
     {
-        N->getParent()->setLChild(rotated);
+        return false;
+    }
+    else if(s < tree->data)
+    {
+        return search(s, tree->left);
+    }
+    else if(tree->data < s)
+    {
+        return search(s, tree->right);
     }
     else
     {
-        N->getParent()->setRChild(rotated);
+        ;
     }
-    rotated->setRChild(N);
-    N->setLChild(B);
 }
 
-void BTree::checkTreeBalance(Cell* Node)
+bool AVLTree::search(const int &x)
 {
-    std::cout<<"checking tree balance"<<std::endl;
-//    if(Node->getLChild()!=NULL)
-//    {
-//        --treeBalance;
-//    }
-//    if(Node->getRChild()!=NULL)
-//    {
-//        ++treeBalance;
-//    }
+    if (search(x, root)){
+        return true;
+    }
+    else
+        return false;
 }
 
-void BTree::addNode(int key, Cell* subRoot)
+void AVLTree::clear(Node* & tree)
 {
-    Cell* Node = new Cell(key);
-    Cell* Tmp = subRoot;
-    if(Tmp==NULL)
+    if(tree != NULL)
     {
-        std::cout<<"new root: "<<key<<std::endl;
-        Root = Node;
-        std::cout<<"...done"<<std::endl;
+        clear(tree->left);
+        clear(tree->right);
+        delete tree;
+
+    }
+
+    tree = NULL;
+}
+
+void AVLTree::push(const int & n, Node* & v)
+{
+    if (v == NULL)
+    {
+        v = new Node(n , NULL, NULL, 0);
     }
     else
     {
-        if(Tmp->getKey()>=key)
+        if ( n < v->data)
         {
-            if (Tmp->getLChild()==NULL)
+            push(n, v->left);   // goes to left node
+
+            if ((avlHeight(v->left) - avlHeight(v->right))==2)
+            {
+                if (n < v->left->data)
                 {
-                    Tmp->setLChild(Node);
-                    std::cout<<"setting new LChild: "<<key<<std::endl;
-                    RebalanceTree(Root);
+                    singleLeftRotate(v);
                 }
                 else
                 {
-                    delete Node;
-                    addNode(key, Tmp->getLChild());
+                    doubleLeftRotate(v);
                 }
+            }
         }
-        else
+        else if ( v->data < n)
         {
-            if (Tmp->getRChild()==NULL)
+            push(n, v->right);  // goes to right node
+            if ((avlHeight(v->right) - avlHeight(v->left))==2)
+            {
+                if (n > v->right->data)
                 {
-                    Tmp->setRChild(Node);
-                    std::cout<<"setting new RChild: "<<key<<std::endl;
-                    RebalanceTree(Root);
+                    singleRightRotate(v);
                 }
                 else
                 {
-                    delete Node;
-                    addNode(key, Tmp->getRChild());
+                    doubleRightRotate(v);
                 }
+            }
+        }
+        else
+        {
+            ; // duplicate; do nothing.
         }
     }
+    int a,b,c;
+    a = avlHeight(v->left);
+    b = avlHeight(v->right);
+    c = max(a,b);
+    v->height = c + 1;
+
 }
 
-void BTree::RebalanceTree(Cell* Node)
+void AVLTree::printPreOrder() const
 {
-    std::cout<<"rebalancing"<<std::endl;
-    checkTreeBalance(Node);
-    std::cout<<treeBalance<<std::endl;
-    if(treeBalance<=-2)
-    {
-        std::cout<<"Tree is tilted to the left"<<std::endl;
-        rotateLeft(Node);
-        checkTreeBalance(Node);
-    }
-    else
-    if(treeBalance>=2)
-    {
-        std::cout<<"Tree is tilted to the right"<<std::endl;
-        rotateRight(Node);
-        checkTreeBalance(Node);
-    }
-    else
-    if(treeBalance<2 && treeBalance>-2)
-    {
-        std::cout<<"Tree is balanced"<<std::endl;
-    }
-    std::cout<<"Tree has been balanced properly"<<std::endl;
+    preOrder(root);
 }
 
-void BTree::deleteNode(Cell* Node)
+
+void AVLTree::preOrder(Node* pre) const
 {
-    std::cout<<"deleting node"<<std::endl;
-            if (Node->getLChild()==NULL && Node->getRChild()==NULL)
-                {
-                    if(Node==Root)
-                    {
-                        Root = NULL;
-                        delete Node;
-                        return;
-                    }
-                    else
-                    if(Node==Node->getParent()->getLChild())
-                    {
-                        Node->getParent()->setRChild(Node->getLChild());
-                    }
-                    else
-                    {
-                        Node->getParent()->setLChild(Node->getLChild());
-                    }
-                    delete Node;
-                }
-            else
-                if(Node->getLChild()!=NULL && Node->getRChild()==NULL)
-                {
-                    if(Node==Root)
-                    {
-                        Root = Node->getLChild();
-                        delete Node;
-                        return;
-                    }
-                    if(Node==Node->getParent()->getLChild())
-                    {
-                        Node->getParent()->setRChild(Node->getLChild());
-                    }
-                    else
-                    {
-                        Node->getParent()->setLChild(Node->getLChild());
-                    }
-                    delete Node;
-                }
-            else
-                if(Node->getRChild()!=NULL && Node->getLChild()==NULL)
-                {
-                    if(Node==Root)
-                    {
-                        Root = Node->getRChild();
-                        delete Node;
-                        return;
-                    }
-                    if(Node==Node->getParent()->getRChild())
-                    {
-                        Node->getParent()->setRChild(Node->getRChild());
-                    }
-                    else
-                    {
-                        Node->getParent()->setLChild(Node->getRChild());
-                    }
-                    delete Node;
-                }
-            else
-                {
-                    Cell* Tmp = Node;
-                    Tmp = Tmp->getRChild();
-                    while(Tmp->getLChild()!=NULL)
-                    {
-                        Tmp = Tmp->getLChild();
-                    }
-                    if(Node->getParent()!=NULL)
-                    {
-                        if(Node==Node->getParent()->getRChild())
-                        {
-                            Node->getParent()->setRChild(Tmp);
-                        }
-                        else
-                        {
-                            Node->getParent()->setLChild(Tmp);
-                        }
-                    }
-                    Tmp->getParent()->setLChild(Tmp->getRChild());
-                    delete Node;
-                }
-    if(Root!=NULL)
+    if(pre != NULL)
     {
-        RebalanceTree(Root);
+        std::cout << " " << pre->data << " ";
+        preOrder(pre->left);
+        preOrder(pre->right);
     }
 }
 
-Cell* BTree::RetrieveNode(int key, Cell* subRoot)
+Node* AVLTree::getRoot()
 {
-    Cell* Node = subRoot;
-    if(subRoot != NULL)
-    {
-        if(Node->getKey() == key)
-            {
-                return Node;
-            }
-        else
-            if (key > Node->getKey())
-            {
-                RetrieveNode(key, Node->getRChild());
-            }
-        else
-            {
-                RetrieveNode(key, Node->getLChild());
-            }
-    }
-    else
-    return NULL;
+    return root;
 }
 
-Cell *BTree::getRoot()
+void AVLTree::print(Node *node, int level)
 {
-    return Root;
+    int i;
+    if (node!=NULL)
+    {
+        print(node->right, level + 1);
+        std::cout<<std::endl;
+        if (node == root)
+        std::cout<<"Root -> ";
+        for (i = 0; i < level && node != root; i++)
+        std::cout<<"        ";
+        std::cout<<node->data;
+        print(node->left, level + 1);
+    }
 }
+
