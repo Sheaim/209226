@@ -55,4 +55,14 @@ void Logger::log(int* collection, int array_size)
     std::cout<<std::endl;
     m_file <<std::endl;
 }
+void Logger::log(double* collection, int array_size)
+{
+    for(int i=0; i<array_size; ++i)
+    {
+        std::cout << collection[i] << " ";
+        m_file << collection[i] << " ";
+    }
+    std::cout<<std::endl;
+    m_file <<std::endl;
+}
 
