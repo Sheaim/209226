@@ -94,9 +94,9 @@ double benchmark_number<type>::runBenchmark()
     int templength = arrayStack->size_licznik(); //takes value provided by the data structure
     int* temp = new type[templength]; //self explanatory
 
-    obs.triggerTimer();
+    obs->triggerTimer();
     temp= quicksort(arrayStack->getTab(), arrayStack->size_licznik()); //sorts the array and stores it in the form of 'temp' array
-    obs.triggerTimer();
+    obs->triggerTimer();
     delete arrayStack;
     arrayStack = new Stos<type>(); //reallocates data structure
     for (int i=0; i<templength; ++i)
@@ -105,7 +105,7 @@ double benchmark_number<type>::runBenchmark()
     }
     delete temp;
     double* timer;
-    timer = obs.giveTimerData();
+    timer = obs->giveTimerData();
     return timer[0];
 }
 /*!
