@@ -1,3 +1,5 @@
+//"Elements" should actually read 1 more every time, since that value is derived from 'i'. I simply forgot to add 1 in the code.
+
 elements:
 0
 ----AddTime----
