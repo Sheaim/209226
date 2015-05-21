@@ -104,6 +104,11 @@ int* Graph::findNodePath(int destination)
 
 void Graph::printGraph(Node* first)
 {
+    bool* visited = new bool[nodeArrayLength];
+    for(int j=0; j<nodeArrayLength; j++)
+        {
+            visited[j]=false;
+        }
     if(first == root)
     {
         std::cout<<"Root---->"<<first->getKey()<<std::endl;
@@ -112,8 +117,18 @@ void Graph::printGraph(Node* first)
     {
         std::cout<<first->getKey()<<std::endl;
     }
+    int j;
     for(int i=0; i<first->getAdjArrayLength(); i++)
     {
-        printGraph(first->getAdj()[i]->getTo());
+        for(j=0; j<nodeArrayLength; j++)
+        {
+            if(first->getAdj()[i]->getTo()==nodes[j])
+            break;
+        }
+        if(visited[j]!=true)
+        {
+            visited[j]=true;
+            printGraph(first->getAdj()[i]->getTo());
+        }
     }
 }
