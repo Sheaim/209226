@@ -6,8 +6,9 @@ add_subdirectory(test)
 include_directories (..)
 add_executable(finder_tests
 test/test_finder.cpp
-finder.cpp
 graph.cpp
+node.cpp
+edge.cpp
 )
 
 find_library(COMMON NAMES common PATHS "../common" NO_DEFAULT_PATH)

@@ -45,7 +45,8 @@ TEST_CASE( "logger logSimpleString", "[factorial]" ) {
     gr->addEdge(5, 7, 1);
     gr->addEdge(7, 8, 1);
 	// then
-	gr->findNodePath();
+	gr->printGraph(gr->getRoot());
+	gr->findNodePath(8);
 	REQUIRE(false);
 
 	//cleanup

@@ -1,108 +1,119 @@
 #include "graph.h"
-#include <iomanip>
+#include "edge.h"
+#include "node.h"
+//Graph class specific functions
 
-void Graph::addNode(const int &key)
+Graph::Graph()
 {
-    vmap::iterator itr=work.begin();
-    itr=work.find(key);
-    if(itr==work.end())
+    root = NULL;
+    nodeArrayLength = 0;
+    edgeArrayLength = 0;
+}
+
+Graph::~Graph()
+{
+    delete[] nodes;
+    delete[] edges;
+    root = NULL;
+}
+
+Node* Graph::getRoot()
+{
+    return root;
+}
+void Graph::resizeEdgeArray(int newLength)
+{
+    Edge** temp = new Edge*[edgeArrayLength];
+    for(int i=0; i<edgeArrayLength; ++i)
     {
-        node *v;
-        v= new node(key);
-        work[key]=v;
-        return;
+        temp[i] = edges[i];
     }
-    std::cout<<"\nNode already exists!";
+    delete[] edges;
+    edges = new Edge*[newLength];
+    for(int i=0; i<edgeArrayLength; ++i)
+    {
+        edges[i] = temp[i];
+    }
+    delete[] temp;
 }
 
-void Graph::addEdge(const int& from, const int& to, double cost)
+void Graph::resizeNodeArray(int newLength)
 {
-    node *f=(work.find(from)->second);
-    node *t=(work.find(to)->second);
-    std::pair<int,node *> edge = std::make_pair(cost,t);
-    f->adj.push_back(edge);
-    std::pair<int,node *> edge2 = std::make_pair(cost, f);
-    t->adj.push_back(edge);
+    Node** temp = new Node*[nodeArrayLength];
+    for(int i=0; i<nodeArrayLength; ++i)
+    {
+        temp[i] = nodes[i];
+    }
+    delete[] nodes;
+    nodes = new Node*[newLength];
+    for(int i=0; i<nodeArrayLength; ++i)
+    {
+        nodes[i] = temp[i];
+    }
+    delete[] temp;
 }
 
-
-int n;
-sList ** A;
-bool * visited;
-
-// Recurrent DFS procedure
-//----------------------------------------
-void DFS(int v)
+void Graph::addNode(int key)
 {
-  sList * p;
+    Node* newNode = new Node(key);
 
-  visited[v] = true;     // mark as visited
-  std::cout << std::setw(3) << v;  // write down visited node
-
-// visit all unvisited neighbors
-
-  for(p = A[v]; p; p = p->next)
-    if(!visited[p->v]) DFS(p->v);
-}
-
-void Graph::findNodePath()
-{
-  int m,i,v1,v2;
-  sList *p,*r;
-
-  n = work.size();  //read down number of nodes
-
-  A = new sList * [n];       // Create table of adjacency lists
-  visited = new bool[n];       // create visited marks list
-
-  //fil the matrix with empty lists
-  for(i = 0; i < n; i++)
-  {
-    A[i] = NULL;
-    visited[i] = false;
-  }
-
-  // read edge definitions
-  m=0;
-  for(i=0; i<work.size(); i++)
-  {
-      for(int j=0; j<work[i]->adj.size(); j++)
+    if(root==NULL)
         {
-            m++;
+            root = newNode;
         }
-  }
-  for(i=0; i<work.size(); i++)
-  {
-      for(int j=0; j<work[i]->adj.size(); j++)
-      {
-        v1 = work[i]->adj[j].second->key;
-        v2 = work[i]->key;
-        p = new sList;    // Create new element
-        p->v = v2;          // number it as v2
-        p->next = A[v1];    // add it to the beggining of the list
-        A[v1] = p;
-      }
-  }
-
-  std::cout << std::endl;
-
-  // DFS commences
-  DFS(0);
-  // delete the adjacency lists
-
-  for(i = 0; i < n; i++)
-  {
-    p = A[i];
-    while(p)
-    {
-      r = p;
-      p = p->next;
-      delete r;
-    }
-  }
-  delete [] A;
-   delete [] visited;
-
-  std::cout << std::endl;
+    resizeNodeArray(nodeArrayLength+1);
+    nodes[nodeArrayLength]=newNode;
+    nodeArrayLength++;
 }
 
+void Graph::addEdge(Node* from, Node* to, int weight)
+{
+    Edge* newEdge = new Edge(from, to, weight);
+    resizeEdgeArray(edgeArrayLength+1);
+    edges[edgeArrayLength]=newEdge;
+    edgeArrayLength++;
+    from->addEdge(newEdge);
+}
+void Graph::addEdge(int fromKey, int toKey, int weight)
+{
+    int i;
+    for(i=0; i<nodeArrayLength; i++)
+    {
+        if(nodes[i]->getKey()==fromKey)
+            {
+                break;
+            }
+        else;
+    }
+    Node* From = nodes[i];
+    for(i=0; i<nodeArrayLength; i++)
+    {
+        if(nodes[i]->getKey()==toKey)
+            {
+                break;
+            }
+        else;
+    }
+    Node* To = nodes[i];
+    addEdge(From, To, weight);
+}
+int* Graph::findNodePath(int destination)
+{
+    return {0};
+}
+
+void Graph::printGraph(Node* first)
+{
+    if(first == root)
+    {
+        std::cout<<"Root---->"<<first->getKey()<<std::endl;
+    }
+    else
+    {
+        std::cout<<first->getKey()<<std::endl;
+    }
+    for(int i=0; i<first->getAdjArrayLength(); i++)
+    {
+        printGraph(first->getAdj()[i]->getTo());
+    }
+}

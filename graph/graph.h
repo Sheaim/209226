@@ -2,37 +2,29 @@
 #define GRAPH_H_
 
 #include <iostream>
-            #include <vector>
-            #include <map>
-            #include <string>
-
-            struct node{
-                typedef std::pair<int,node*> ve;
-                std::vector<ve> adj; //cost of edge, destination node
-                int key;
-                bool visited;
-                node(int s)
-                {
-                    visited = 0;
-                    key=s;
-                }
-            };
-
-            //helper list
-struct sList
-{
-  sList * next;
-  int v;
-};
-
+class Edge;
+class Node;
 
 class Graph
 {
+protected:
+    virtual void resizeNodeArray(int newLength);
+    virtual void resizeEdgeArray(int newLength);
+    virtual void addEdge(Node* from, Node* to, int weight);
+    int nodeArrayLength;
+    int edgeArrayLength;
+private:
+    Node* root;
+    Node** nodes;
+    Edge** edges;
 public:
-        typedef std::map<int, node *> vmap;
-        vmap work;
-        void addNode(const int&);
-        void addEdge(const int& from, const int& to, double cost);
-        void findNodePath();
+    Graph();
+    virtual ~Graph();
+public:
+    virtual Node* getRoot();
+    virtual void addNode(int key);
+    virtual void addEdge(int fromKey, int toKey, int weight);
+    virtual int* findNodePath(int destination);
+    virtual void printGraph(Node* first);
 };
 #endif // GRAPH_H_
