@@ -9,6 +9,7 @@ test/test_finder.cpp
 graph.cpp
 node.cpp
 edge.cpp
+finder.cpp
 )
 
 find_library(COMMON NAMES common PATHS "../common" NO_DEFAULT_PATH)

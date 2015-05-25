@@ -24,7 +24,9 @@ public:
     virtual Node* getRoot();
     virtual void addNode(int key);
     virtual void addEdge(int fromKey, int toKey, int weight);
-    virtual int* findNodePath(int destination);
-    virtual void printGraph(Node* first);
+    virtual Node** getNodes();
+    virtual Edge** getEdges();
+    int getNAL();
+    int getEAL();
 };
 #endif // GRAPH_H_

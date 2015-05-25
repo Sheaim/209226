@@ -12,7 +12,7 @@
 
 #include "common/catch.hpp"
 #include "common/logger.h"
-#include "../graph.h"
+#include "../finder.h"
 
 TEST_CASE( "logger logSimpleString", "[factorial]" ) {
 
@@ -22,7 +22,6 @@ TEST_CASE( "logger logSimpleString", "[factorial]" ) {
 
 	// given
     Graph* gr = new Graph();
-
     gr->addNode(0);
     gr->addNode(1);
     gr->addNode(2);
@@ -45,10 +44,10 @@ TEST_CASE( "logger logSimpleString", "[factorial]" ) {
     gr->addEdge(5, 7, 1);
     gr->addEdge(7, 8, 1);
 	// then
-	gr->printGraph(gr->getRoot());
-	gr->findNodePath(8);
+	Finder* f = new Finder(gr);
+	f->findNodePath(8);
 	REQUIRE(false);
 
 	//cleanup
-
+	delete f;
 }

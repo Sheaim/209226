@@ -97,38 +97,19 @@ void Graph::addEdge(int fromKey, int toKey, int weight)
     Node* To = nodes[i];
     addEdge(From, To, weight);
 }
-int* Graph::findNodePath(int destination)
+Node** Graph::getNodes()
 {
-    return {0};
+    return nodes;
 }
-
-void Graph::printGraph(Node* first)
+Edge** Graph::getEdges()
 {
-    bool* visited = new bool[nodeArrayLength];
-    for(int j=0; j<nodeArrayLength; j++)
-        {
-            visited[j]=false;
-        }
-    if(first == root)
-    {
-        std::cout<<"Root---->"<<first->getKey()<<std::endl;
-    }
-    else
-    {
-        std::cout<<first->getKey()<<std::endl;
-    }
-    int j;
-    for(int i=0; i<first->getAdjArrayLength(); i++)
-    {
-        for(j=0; j<nodeArrayLength; j++)
-        {
-            if(first->getAdj()[i]->getTo()==nodes[j])
-            break;
-        }
-        if(visited[j]!=true)
-        {
-            visited[j]=true;
-            printGraph(first->getAdj()[i]->getTo());
-        }
-    }
+    return edges;
+}
+int Graph::getEAL()
+{
+    return edgeArrayLength;
+}
+int Graph::getNAL()
+{
+    return nodeArrayLength;
 }
