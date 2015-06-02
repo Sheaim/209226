@@ -15,10 +15,10 @@ AVLTree::AVLTree()
 
 AVLTree::~AVLTree()
 {
-    clear(root);
+    clear();
 }
 
-void AVLTree::push(const int & n)
+void AVLTree::push(const int n)
 {
     push(n,root);
 }
@@ -80,7 +80,7 @@ int AVLTree::avlHeight(Node * h)
 }
 
 
-bool AVLTree::search(const int& s, Node *& tree)
+bool AVLTree::search(const int s, Node *& tree)
 {
     if(tree == NULL)
     {
@@ -100,7 +100,7 @@ bool AVLTree::search(const int& s, Node *& tree)
     }
 }
 
-bool AVLTree::search(const int &x)
+bool AVLTree::search(const int x)
 {
     if (search(x, root)){
         return true;
@@ -109,7 +109,7 @@ bool AVLTree::search(const int &x)
         return false;
 }
 
-void AVLTree::clear(Node* & tree)
+void AVLTree::clear(Node* tree)
 {
     if(tree != NULL)
     {
@@ -118,11 +118,16 @@ void AVLTree::clear(Node* & tree)
         delete tree;
 
     }
-
     tree = NULL;
 }
 
-void AVLTree::push(const int & n, Node* & v)
+void AVLTree::clear()
+{
+    clear(root);
+    root = NULL;
+}
+
+void AVLTree::push(const int n, Node* & v)
 {
     if (v == NULL)
     {

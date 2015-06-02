@@ -30,7 +30,7 @@ TEST_CASE( "BST binary tree, simple test", "[factorial]" ) {
 	//adding elements
 	double meanAddTime = 0;
 	double meanSearchTime = 0;
-	for(int i=0;i<(1000);++i)
+for(int i=0;i<(1000);++i)
     {
         n = i;
         obs->triggerTimer();
@@ -60,5 +60,5 @@ TEST_CASE( "BST binary tree, simple test", "[factorial]" ) {
 	// then
     REQUIRE(false);
     //cleanup
-    testingTree->clear(testingTree->getRoot());
+    delete testingTree;
 }

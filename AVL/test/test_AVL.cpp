@@ -59,4 +59,7 @@ TEST_CASE( "AVL binary tree, simple test", "[factorial]" ) {
     }
 	// then
     REQUIRE(false);
+
+    //cleanup
+    delete testingTree;
 }

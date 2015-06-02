@@ -17,8 +17,9 @@ class BSTree {
 private:
 
     Node* root;
-    virtual void push(const int n, Node * v);
-    virtual bool search( const int s, Node * tree) ;
+    virtual void push(const int n, Node * & v);
+    virtual bool search( const int s, Node * & tree) ;
+    virtual void clear(Node* & tree);
 public:
     BSTree();
     virtual ~BSTree();
@@ -29,7 +30,7 @@ public:
     virtual void printPreOrder() const;
     virtual void preOrder(Node* pre) const;
 
-    virtual void clear(Node* tree);
+    virtual void clear();
 
     //search and utility functions
     virtual bool search(const int s);
