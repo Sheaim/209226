@@ -24,7 +24,7 @@ TEST_CASE( "BST binary tree, simple test", "[factorial]" ) {
 	std::auto_ptr<student::common::Logger> pLogger(new student::common::Logger(logFileName));
 	Observer* obs = new Observer();
 	// given
-	AVLTree* testingTree = new BSTree();
+	BSTree* testingTree = new BSTree();
 	int n;
 	// when
 	//adding elements

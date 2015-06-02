@@ -28,7 +28,7 @@ int BSTree::max(int v1, int v2)
     return ((v1 > v2) ? v1 : v2);
 }
 
-int BSTree::avlHeight(Node * h)
+int BSTree::bstHeight(Node * h)
 {
     int n;
     if( h == NULL)
