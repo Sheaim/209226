@@ -39,7 +39,7 @@ void Observer::triggerTimer()
             {
 
                 ++numberOfDataEntries;
-                timerData = new double [numberOfDataEntries];
+                timerData = new double [numberOfDataEntries+1];
                 timerData[numberOfDataEntries] = stop - start;
             }
             else
