@@ -18,7 +18,7 @@ BSTree::~BSTree()
     clear(root);
 }
 
-void BSTree::push(const int & n)
+void BSTree::push(const int n)
 {
     push(n,root);
 }
@@ -44,7 +44,7 @@ int BSTree::bstHeight(Node * h)
 }
 
 
-bool BSTree::search(const int& s, Node *& tree)
+bool BSTree::search(const int s, Node * tree)
 {
     if(tree == NULL)
     {
@@ -64,7 +64,7 @@ bool BSTree::search(const int& s, Node *& tree)
     }
 }
 
-bool BSTree::search(const int &x)
+bool BSTree::search(const int x)
 {
     if (search(x, root)){
         return true;
@@ -73,18 +73,26 @@ bool BSTree::search(const int &x)
         return false;
 }
 
-void BSTree::clear(Node* & tree)
+void BSTree::clear(Node* tree)
 {
-    if(tree != NULL)
+    if(tree->left==NULL&&tree->right==NULL)
     {
-        clear(tree->left);
-        clear(tree->right);
         delete tree;
     }
-    tree = NULL;
+    else
+    {
+        if(tree->left!=NULL)
+        {
+            clear(tree->left);
+        }
+        if(tree->right!=NULL)
+        {
+            clear(tree->right);
+        }
+    }
 }
 
-void BSTree::push(const int & n, Node* & v)
+void BSTree::push(const int n, Node* v)
 {
     if (v == NULL)
     {

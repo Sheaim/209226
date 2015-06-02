@@ -59,4 +59,6 @@ TEST_CASE( "BST binary tree, simple test", "[factorial]" ) {
     }
 	// then
     REQUIRE(false);
+    //cleanup
+    testingTree->clear(testingTree->getRoot());
 }
