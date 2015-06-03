@@ -50,6 +50,7 @@ void Finder::findNodePath(Node* first, int destination)
             if(checkIfVisited(current->getAdj()[i]->getTo()->getKey()));
             else
             {
+                markVisited(current->getAdj()[i]->getTo()->getKey());
                 findNodePath(current->getAdj()[i]->getTo(), destination);
             }
         }

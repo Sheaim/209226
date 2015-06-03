@@ -1,8 +1,8 @@
 /*
- * test_logger.cpp
+ * test_finder.cpp
  *
- *  Created on: Apr 5, 2015
- *      Author: topeerz
+ *  Created on: may 25, 2015
+ *      Author: Sheaim
  */
 
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
@@ -14,7 +14,7 @@
 #include "common/logger.h"
 #include "../finder.h"
 
-TEST_CASE( "logger logSimpleString", "[factorial]" ) {
+TEST_CASE( "finder findOneElement", "[factorial]" ) {
 
 	// pre
 	const std::string logFileName = "logfile.txt";
